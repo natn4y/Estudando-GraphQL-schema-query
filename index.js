@@ -6,10 +6,20 @@ const typeDefs = gql(
    `
     scalar Date
 
+    type Usuario {
+        id: ID
+        nome: String!
+        email: String!
+        idade: Int
+        salario: Float
+        vip: Boolean
+    }
+
    # Pontos de entrada da sua API!
     type Query {
-        ola: String
-        horaCerta: Date
+        ola: String!
+        horaCerta: Date!
+        usuarioLogado: Usuario
     }`
 );
 
@@ -22,6 +32,16 @@ const resolvers = {
         },
         horaCerta() {
             return `${new Date}`
+        },
+        usuarioLogado() {
+            return {
+                id: 1,
+                nome: 'Daryl',
+                email: 'daryl@gmail.com',
+                idade: 27,
+                salario: 1700.57,
+                vip: true
+            }
         }
     }
 }
