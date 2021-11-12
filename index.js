@@ -3,10 +3,13 @@ const { ApolloServer, gql } = require('apollo-server');
 
 // Schemas
 const typeDefs = gql(
-   ` # Pontos de entrada da sua API!
+   `
+    scalar Date
+
+   # Pontos de entrada da sua API!
     type Query {
         ola: String
-        horaCerta: String
+        horaCerta: Date
     }`
 );
 
