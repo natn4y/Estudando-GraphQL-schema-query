@@ -6,21 +6,30 @@ const perfis = [
     { id: 2, nome: 'administrador'}
 ]
 
+const say = [
+    {
+        ola: 'Hello'
+    }
+]
+
 const usuarios = [{
     id: 1,
     nome: 'Daryl Warn',
     email: 'DarylWarn@gmail.com',
     idade: 27,
+    perfil_id: 1,
 }, {
     id: 2,
     nome: 'Sarah Warn',
     email: 'SarahWarn@gmail.com',
     idade: 23,
+    perfil_id: 2,
 }, {
     id: 3,
     nome: 'Vanessa Warn',
     email: 'VanessaWarn@gmail.com',
     idade: 26,
+    perfil_id: 1,
 }]
 
 // Schemas
@@ -28,9 +37,14 @@ const typeDefs = gql(
    `
     scalar Date
 
+    type Say {
+        ola: String
+    }
+
     type Perfil {
         id: Int
         nome: String
+        say: Say
     }
 
     type Usuario {
@@ -41,6 +55,7 @@ const typeDefs = gql(
         salario: Float
         vip: Boolean
         isAdm: Boolean!
+        perfil: Perfil
     }
 
     type Produto {
@@ -64,18 +79,30 @@ const typeDefs = gql(
         usuario(id: Int): Usuario
         perfis: [Perfil]
         perfil(id: Int): Perfil
+        say: [Say]
     }`
 );
 
 // resolvers
 const resolvers = {
+
+    Perfil: {
+        say() {
+            return say[0]
+        }
+    },
     Usuario: {
         salario(usuario) {
             return usuario.salario_real
         },
         isAdm(usuario) {
             return false
-        }
+        },
+        perfil(usuario) {
+            const selecionados = perfis
+            .filter(perfil => perfil.id === usuario.perfil_id)
+            return selecionados ? selecionados[0] : null
+        },
     },
     Produto: {
         precoComDesconto(parent) {
@@ -124,6 +151,9 @@ const resolvers = {
         },
         perfis() {
             return perfis
+        },
+        say() {
+            return say
         },
         perfil(_, args) {
             const selecionados = usuarios
