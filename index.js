@@ -13,6 +13,7 @@ const typeDefs = gql(
         idade: Int
         salario: Float
         vip: Boolean
+        isAdm: Boolean!
     }
 
    # Pontos de entrada da sua API!
@@ -28,6 +29,9 @@ const resolvers = {
     Usuario: {
         salario(usuario) {
             return usuario.salario_real
+        },
+        isAdm(usuario) {
+            return false
         }
     },
 
