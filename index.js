@@ -1,6 +1,11 @@
 // Imports do ApolloServer e gql
 const { ApolloServer, gql } = require('apollo-server');
 
+const perfis = [
+    { id: 1, nome: 'comum' },
+    { id: 2, nome: 'administrador'}
+]
+
 const usuarios = [{
     id: 1,
     nome: 'Daryl Warn',
@@ -22,6 +27,11 @@ const usuarios = [{
 const typeDefs = gql(
    `
     scalar Date
+
+    type Perfil {
+        id: Int
+        nome: String
+    }
 
     type Usuario {
         id: Int
@@ -52,6 +62,8 @@ const typeDefs = gql(
 
         usuarios: [Usuario]
         usuario(id: Int): Usuario
+        perfis: [Perfil]
+        perfil(id: Int): Perfil
     }`
 );
 
@@ -108,6 +120,14 @@ const resolvers = {
         usuario(_, args) {
             const selecionados = usuarios
             .filter(usuario => usuario.id === args.id)
+            return selecionados ? selecionados[0] : null
+        },
+        perfis() {
+            return perfis
+        },
+        perfil(_, args) {
+            const selecionados = usuarios
+            .filter(perfil => perfil.id === args.id)
             return selecionados ? selecionados[0] : null
         }
     }
