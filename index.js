@@ -1,6 +1,23 @@
 // Imports do ApolloServer e gql
 const { ApolloServer, gql } = require('apollo-server');
 
+const usuarios = [{
+    id: 1,
+    nome: 'Daryl Warn',
+    email: 'DarylWarn@gmail.com',
+    idade: 27,
+}, {
+    id: 2,
+    nome: 'Sarah Warn',
+    email: 'SarahWarn@gmail.com',
+    idade: 23,
+}, {
+    id: 3,
+    nome: 'Vanessa Warn',
+    email: 'VanessaWarn@gmail.com',
+    idade: 26,
+}]
+
 // Schemas
 const typeDefs = gql(
    `
@@ -29,6 +46,11 @@ const typeDefs = gql(
         horaCerta: Date!
         usuarioLogado: Usuario
         produtoEmDestaque: Produto
+
+        #vai retornar obrigatoriamente um array que vai ter elementos obrigatoriamente do tipo Int
+        numerosMegaSena: [Int!]!
+
+        usuarios: [Usuario]
     }`
 );
 
@@ -74,6 +96,13 @@ const resolvers = {
                 preco: 1499.99,
                 desconto: 0.25
             }
+        },
+        numerosMegaSena() {
+            const crescente = (a, b) => a - b;
+            return Array(6).fill(0).map(n => parseInt(Math.random() * 60 + 1)).sort(crescente)
+        },
+        usuarios() {
+            return usuarios
         }
     }
 }
