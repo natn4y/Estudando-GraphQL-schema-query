@@ -2,14 +2,14 @@
 const { ApolloServer, gql } = require('apollo-server');
 
 const perfis = [
-    { id: 1, nome: 'comum' },
-    { id: 2, nome: 'administrador'}
+    { id: 1, nivel: 'usuario' },
+    { id: 2, nivel: 'administrador'},
 ]
 
 const say = [
     {
-        ola: 'Hello'
-    }
+        ola: 'Hello',
+    },
 ]
 
 const usuarios = [{
@@ -43,7 +43,7 @@ const typeDefs = gql(
 
     type Perfil {
         id: Int
-        nome: String
+        nivel: String
         say: Say
     }
 
@@ -88,20 +88,20 @@ const resolvers = {
 
     Perfil: {
         say() {
-            return say[0]
+            return say[0];
         }
     },
     Usuario: {
         salario(usuario) {
-            return usuario.salario_real
+            return usuario.salario_real;
         },
-        isAdm(usuario) {
-            return false
+        isAdm() {
+            return false;
         },
         perfil(usuario) {
             const selecionados = perfis
             .filter(perfil => perfil.id === usuario.perfil_id)
-            return selecionados ? selecionados[0] : null
+            return selecionados ? selecionados[0] : null;
         },
     },
     Produto: {
@@ -115,10 +115,10 @@ const resolvers = {
     Query: {
         // resolver para cada consulta:
         ola() {
-            return 'Bom dia!'
+            return 'Bom dia!';
         },
         horaCerta() {
-            return `${new Date}`
+            return `${new Date}`;
         },
         usuarioLogado() {
             return {
@@ -128,46 +128,46 @@ const resolvers = {
                 idade: 27,
                 salario_real: 1700.57,
                 vip: true
-            }
+            };
         },
         produtoEmDestaque() {
             return {
                 nome: 'Guitar',
                 preco: 1499.99,
                 desconto: 0.25
-            }
+            };
         },
         numerosMegaSena() {
             const crescente = (a, b) => a - b;
-            return Array(6).fill(0).map(n => parseInt(Math.random() * 60 + 1)).sort(crescente)
+            return Array(6).fill(0).map(n => parseInt(Math.random() * 60 + 1)).sort(crescente);
         },
         usuarios() {
-            return usuarios
+            return usuarios;
         },
         usuario(_, args) {
             const selecionados = usuarios
             .filter(usuario => usuario.id === args.id)
-            return selecionados ? selecionados[0] : null
+            return selecionados ? selecionados[0] : null;
         },
         perfis() {
-            return perfis
+            return perfis;
         },
         say() {
-            return say
+            return say;
         },
         perfil(_, args) {
             const selecionados = usuarios
             .filter(perfil => perfil.id === args.id)
-            return selecionados ? selecionados[0] : null
-        }
-    }
+            return selecionados ? selecionados[0] : null;
+        },
+    },
 }
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers
-})
+    resolvers,
+});
 
 server.listen().then(({ url }) => {
-    console.log(`Executando em ${url}`)
-})
+    console.log(`Executando em ${url}`);
+},);
