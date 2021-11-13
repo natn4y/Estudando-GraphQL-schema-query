@@ -1,11 +1,17 @@
-# Pontos de entrada da sua API!
+#import Usuario from './Usuario.graphql'
+#import Produto from './Produto.graphql'
+#import Perfil from './Usuario.graphql'
+#import Say from './Usuario.graphql'
+
+# Ponto de entrada da API
+scalar Date
 type Query {
   ola: String!
   horaCerta: Date!
   usuarioLogado: Usuario
   produtoEmDestaque: Produto
 
-  #vai retornar obrigatoriamente um array que vai ter elementos obrigatoriamente do tipo Int
+  # Vai retornar obrigatoriamente um array que vai ter elementos obrigatoriamente do tipo Int
   numerosMegaSena: [Int!]!
 
   usuarios: [Usuario]

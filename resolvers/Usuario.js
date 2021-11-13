@@ -1,4 +1,5 @@
 const { perfis } = require('../data/db.js');
+const { say } = require('../data/db.js');
 
 module.exports = {
     salario(usuario) {
@@ -11,5 +12,8 @@ module.exports = {
         const selecionados = perfis
         .filter(perfil => perfil.id === usuario.perfil_id)
         return selecionados ? selecionados[0] : null;
+    },
+    say() {
+        return say[0];
     },
 }

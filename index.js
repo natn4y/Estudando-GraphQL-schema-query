@@ -1,13 +1,28 @@
-const { ApolloServer, gql } = require('apollo-server');
-const { importSchema } = require('graphql-import')
+const { join } = require('path')
+const { loadSchemaSync } = require('@graphql-tools/load')
+const { addResolversToSchema } = require('@graphql-tools/schema')
+const { UrlLoader } = require('@graphql-tools/url-loader')
+const { GraphQLFileLoader } = require('@graphql-tools/graphql-file-loader')
+const { JsonFileLoader } = require('@graphql-tools/json-file-loader')
 
-const resolvers = require('./resolvers')
+const express = require('express');
+const { graphqlHTTP } = require('express-graphql');
+const { buildSchema } = require('graphql');
 
-const server = new ApolloServer({
-    typeDefs: importSchema('./schema/index.graphql'),
-    resolvers: resolvers,
-});
+const schema = loadSchemaSync(join(__dirname, './schema/index.graphql'), {
+    loaders: [new GraphQLFileLoader()]
+  })
 
-server.listen().then(({ url }) => {
-    console.log(`Executando em ${url}`);
-},);
+const resolvers = require('./resolvers/index.js')
+
+const schemaWithResolvers = addResolversToSchema({
+    schema,
+    resolvers
+  })
+
+const app = express();
+app.use('/graphql', graphqlHTTP({
+  schema: schemaWithResolvers,
+  graphiql: true,
+}));
+app.listen(4000, () => console.log('Now browse to localhost:4000/graphql'));

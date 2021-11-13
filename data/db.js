@@ -2,13 +2,13 @@
 const perfis = [
     { id: 1, nivel: 'usuario' },
     { id: 2, nivel: 'administrador'},
-]
+];
 
 const say = [
     {
         ola: 'Hello',
     },
-]
+];
 
 const usuarios = [{
     id: 1,
@@ -31,6 +31,6 @@ const usuarios = [{
     idade: 26,
     perfil_id: 1,
     status: 'BLOQUEADO',
-}]
+}];
 
 module.exports = { usuarios, say, perfis }

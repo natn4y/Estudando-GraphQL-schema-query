@@ -5,7 +5,6 @@ type Say {
 type Perfil {
   id: Int
   nivel: String
-  say: Say
 }
 
 enum UsuarioStatus {
@@ -24,4 +23,5 @@ type Usuario {
   isAdm: Boolean!
   perfil: Perfil
   status: UsuarioStatus
+  say: Say
 }
