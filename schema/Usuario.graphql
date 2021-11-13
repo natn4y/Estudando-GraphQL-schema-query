@@ -8,6 +8,12 @@ type Perfil {
   say: Say
 }
 
+enum UsuarioStatus {
+    ATIVO
+    INATIVO
+    BLOQUEADO
+}
+
 type Usuario {
   id: Int
   nome: String!
@@ -17,4 +23,5 @@ type Usuario {
   vip: Boolean
   isAdm: Boolean!
   perfil: Perfil
+  status: UsuarioStatus
 }
