@@ -1,0 +1,20 @@
+type Say {
+  ola: String
+}
+
+type Perfil {
+  id: Int
+  nivel: String
+  say: Say
+}
+
+type Usuario {
+  id: Int
+  nome: String!
+  email: String!
+  idade: Int
+  salario: Float
+  vip: Boolean
+  isAdm: Boolean!
+  perfil: Perfil
+}
