@@ -4,10 +4,7 @@
 #import Say from './Usuario.graphql'
 
 # Ponto de entrada da API
-scalar Date
 type Query {
-  ola: String!
-  horaCerta: Date!
   usuarioLogado: Usuario
   produtoEmDestaque: Produto
 

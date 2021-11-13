@@ -11,18 +11,18 @@ const { buildSchema } = require('graphql');
 
 const schema = loadSchemaSync(join(__dirname, './schema/index.graphql'), {
     loaders: [new GraphQLFileLoader()]
-  })
+})
 
 const resolvers = require('./resolvers/index.js')
 
 const schemaWithResolvers = addResolversToSchema({
     schema,
     resolvers
-  })
+})
 
 const app = express();
 app.use('/graphql', graphqlHTTP({
   schema: schemaWithResolvers,
   graphiql: true,
 }));
-app.listen(4000, () => console.log('Now browse to localhost:4000/graphql'));
+app.listen(4000, () => console.log('Executando em: http://localhost:4000/graphql'));
