@@ -51,9 +51,9 @@ module.exports = {
     say() {
         return say;
     },
-    perfil(_, args) {
-        const selecionados = usuarios
-            .filter(perfil => perfil.id === args.id)
-        return selecionados ? selecionados[0] : null;
+    perfil(_, { id }) {
+        const sels = perfis
+            .filter(p => p.id === id)
+        return sels ? sels[0] : null
     },
 }

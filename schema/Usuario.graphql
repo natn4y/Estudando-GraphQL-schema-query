@@ -36,3 +36,12 @@ input UsuarioFiltro {
     id: Int
     email: String
 }
+
+input PerfilInput {
+    nivel: String
+}
+
+input PerfilFiltro {
+    id: Int
+    nivel: String
+}

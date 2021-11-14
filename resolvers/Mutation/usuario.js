@@ -1,5 +1,5 @@
-const { usuarios, proximoId } = require('../data/db.js')
-const validate = require("../validations/email.js");
+const { usuarios, proximoId } = require('../../data/db.js')
+const validate = require("../../validations/email.js");
 
 function indiceUsuario (filtro) {
     if(!filtro) return -1
