@@ -2,16 +2,15 @@ const { usuarios, proximoId } = require('../data/db.js')
 const validate = require("../validations/email.js");
 
 module.exports = {
-    novoUsuario(_, args) {
-        validate.Email(args);
+    novoUsuario(_, { dados }) {
+        validate.Email(dados);
         
         const novo = {
             id: proximoId(),
-            ...args,
+            ...dados,
             perfil_id: 1,
             status: 'ATIVO'
         };
-
         usuarios.push(novo);
         return novo;
     },

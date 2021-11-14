@@ -25,3 +25,14 @@ type Usuario {
   status: UsuarioStatus
   say: Say
 }
+
+input UsuarioInput {
+    nome: String
+    email: String
+    idade: Int
+}
+
+input UsuarioFiltro {
+    id: Int
+    email: String
+}
